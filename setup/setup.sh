@@ -28,4 +28,5 @@ echo "Update existing environment."
 "$dir/android/update-android-emulators-create.sh"
 if [[ "$OSTYPE" == "darwin"* ]]; then
     "$dir/ios/install-brew-packages.sh"
+    "$dir/ios/install-cocoa-pods.sh"
 fi
