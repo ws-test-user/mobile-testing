@@ -8,7 +8,7 @@ brew uninstall --ignore-dependencies carthage && true
 brew uninstall --ignore-dependencies fbsimctl && true
 brew uninstall --ignore-dependencies maven && true
 brew install libimobiledevice --HEAD
-bew install ideviceinstaller--HEAD
+brew install ideviceinstaller --HEAD
 brew install ios-webkit-debug-proxy
 brew install carthage
 brew install maven

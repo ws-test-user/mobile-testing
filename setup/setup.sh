@@ -15,6 +15,7 @@ if [[ "$FORCE" == "true" ]]; then
         "$dir/android/install-java.sh"
         "$dir/android/install-android-sdk.sh"
         "$dir/android/install-android-haxm.sh"
+        "$dir/common/install-maven.sh"
         "$dir/common/install-node.sh"
     else
         echo "Initial install of node, java and android not implemented for linux."
