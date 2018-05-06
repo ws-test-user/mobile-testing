@@ -1,6 +1,10 @@
 package utils;
 
+/**
+ * Set of utils for host OS.
+ */
 public class OSUtils {
+
     /**
      * Get environment variable.
      *

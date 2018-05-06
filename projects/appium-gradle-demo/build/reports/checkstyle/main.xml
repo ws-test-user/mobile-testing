@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.19">
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/main/java/appium/Client.java">
+</file>
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/main/java/appium/Server.java">
+</file>
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/main/java/base/MobileTest.java">
+</file>
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/main/java/settings/MobileSettings.java">
+</file>
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/main/java/utils/OSUtils.java">
+</file>
+</checkstyle>

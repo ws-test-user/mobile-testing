@@ -7,6 +7,9 @@ import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Appium server abstraction.
+ */
 public class Server {
 
     private AppiumDriverLocalService service;

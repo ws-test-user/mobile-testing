@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.19">
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/test/java/calc/base/CalcTest.java">
+</file>
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/test/java/calc/pages/Calc.java">
+</file>
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/test/java/calc/tests/OperationTests.java">
+</file>
+<file name="/Users/dtopuzov/Git/mobile-testing/projects/appium-gradle-demo/src/test/java/calc/tests/SystemTests.java">
+</file>
+</checkstyle>

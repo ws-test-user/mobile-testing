@@ -2,6 +2,9 @@ package settings;
 
 import org.openqa.selenium.Platform;
 
+/**
+ * Mobile settings.
+ */
 public class MobileSettings {
 
     public Platform platform;

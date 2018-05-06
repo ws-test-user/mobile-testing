@@ -5,11 +5,14 @@ import appium.Server;
 import org.testng.annotations.*;
 import settings.MobileSettings;
 
+/**
+ * Base mobile test.
+ */
 public class MobileTest {
 
     private Server server;
-    private Client client;
-    private MobileSettings settings;
+    protected Client client;
+    protected MobileSettings settings;
 
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() throws Exception {

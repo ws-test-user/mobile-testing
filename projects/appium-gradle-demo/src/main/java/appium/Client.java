@@ -11,6 +11,9 @@ import settings.MobileSettings;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Appium client abstraction.
+ */
 public class Client {
 
     private AppiumDriver driver;
