@@ -11,4 +11,3 @@ brew install libimobiledevice --HEAD
 brew install ideviceinstaller --HEAD
 brew install ios-webkit-debug-proxy
 brew install carthage
-brew install maven

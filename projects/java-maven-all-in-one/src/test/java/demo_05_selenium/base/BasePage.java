@@ -1,0 +1,18 @@
+package demo_05_selenium.base;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
+/**
+ * Base page class.
+ * Web pages extend this class.
+ */
+public class BasePage {
+
+    public WebDriver driver;
+
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+}
