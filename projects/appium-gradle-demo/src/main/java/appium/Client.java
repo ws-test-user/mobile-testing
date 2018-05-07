@@ -62,8 +62,9 @@ public class Client {
         }
 
         // Initialize driver.
+        System.out.println("Starting Appium client...");
         this.driver = new AppiumDriver(this.service.getUrl(), cap);
-        System.out.println("Appium driver initialized.");
+        System.out.println("Appium driver session initialized.");
 
         // Set default implicit wait.
         this.driver.manage().timeouts().implicitlyWait(this.settings.findTimeout, TimeUnit.SECONDS);

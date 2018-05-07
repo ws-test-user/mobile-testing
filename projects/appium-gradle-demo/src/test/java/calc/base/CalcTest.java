@@ -16,15 +16,15 @@ public class CalcTest extends MobileTest {
      * Instantiate new Calc object.
      */
     @BeforeClass(alwaysRun = true)
-    public void beforeClass() {
-        this.calc = new Calc(this.client.getDriver());
+    public void beforeClassCalc() {
+        this.calc = new Calc(settings, client.getDriver());
     }
 
     /**
      * Clean calculator between tests.
      */
     @BeforeMethod(alwaysRun = true)
-    public void beforeMethod() {
+    public void beforeMethodCalc() {
         this.calc.clean();
     }
 }

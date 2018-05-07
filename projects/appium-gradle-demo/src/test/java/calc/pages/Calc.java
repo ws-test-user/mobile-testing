@@ -1,9 +1,11 @@
 package calc.pages;
 
+import base.MobileApp;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import settings.MobileSettings;
 
 import java.util.List;
 
@@ -11,16 +13,16 @@ import java.util.List;
  * Calculator app abstraction.
  * Can also look at this class as page object for calculator home page.
  */
-public class Calc {
-    private AppiumDriver driver;
+public class Calc extends MobileApp {
 
     /**
      * Init calculator object (calc app home page).
      *
-     * @param driver appium driver.
+     * @param settings mobile settings.
+     * @param driver   appium driver.
      */
-    public Calc(AppiumDriver driver) {
-        this.driver = driver;
+    public Calc(MobileSettings settings, AppiumDriver driver) {
+        super(settings, driver);
     }
 
     /**
@@ -30,7 +32,7 @@ public class Calc {
      */
     public void clickNumber(Digit digit) {
         String id = "net.ludeke.calculator:id/digit" + digit;
-        MobileElement num = (MobileElement) this.driver.findElementById(id);
+        MobileElement num = (MobileElement) this.getDriver().findElementById(id);
         num.click();
         System.out.println("Click digit \"" + digit + "\" button.");
     }
@@ -42,7 +44,7 @@ public class Calc {
      */
     public void performOperation(Operation operation) {
         String id = String.format("net.ludeke.calculator:id/%s", operation);
-        MobileElement op = (MobileElement) this.driver.findElement(By.id(id));
+        MobileElement op = (MobileElement) this.getDriver().findElement(By.id(id));
         op.click();
         System.out.println("Click " + operation.name() + " button.");
     }
@@ -51,12 +53,12 @@ public class Calc {
      * Clean calculator.
      */
     public void clean() {
-        List<WebElement> buttons = this.driver
-                .findElementsById("net.ludeke.calculator:id/clear");
+        List buttons = this.getDriver()
+                .findElements(By.id("net.ludeke.calculator:id/clear"));
         if (buttons.size() > 0) {
-            buttons.get(0).click();
+            ((WebElement) buttons.get(0)).click();
         } else {
-            WebElement button = this.driver.findElementById("net.ludeke.calculator:id/del");
+            WebElement button = this.getDriver().findElementById("net.ludeke.calculator:id/del");
             while (!this.getResult().equalsIgnoreCase("")) {
                 button.click();
             }
@@ -70,7 +72,7 @@ public class Calc {
      * @return Current result as String (trimmed).
      */
     public String getResult() {
-        return this.driver
+        return this.getDriver()
                 .findElement(By.className("android.widget.EditText"))
                 .getText().trim();
     }

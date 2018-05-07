@@ -8,32 +8,32 @@ import settings.MobileSettings;
 /**
  * Base mobile test.
  */
-public class MobileTest {
+public abstract class MobileTest {
 
-    private Server server;
-    protected Client client;
-    protected MobileSettings settings;
+    private static Server server;
+    protected static Client client;
+    protected static MobileSettings settings;
 
     /**
-     * Before Suite logic.
+     * Before suite logic.
      * - Init settings.
      * - Start appium server.
      * - Start appium client.
      *
      * @throws Exception when fail to start appium server.
      */
-    @BeforeSuite(alwaysRun = true)
+    @BeforeSuite
     public void beforeSuite() throws Exception {
-        // Init settings.
-        this.settings = new MobileSettings();
+        // Init mobile settings.
+        settings = new MobileSettings();
 
         // Start appium server.
-        this.server = new Server(this.settings);
-        this.server.start();
+        server = new Server(settings);
+        server.start();
 
         // Start appium client.
-        this.client = new Client(this.server.getService(), this.settings);
-        this.client.start();
+        client = new Client(server.getService(), settings);
+        client.start();
     }
 
     /**
@@ -41,7 +41,7 @@ public class MobileTest {
      */
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-
+        System.out.println("Mobile Test -> beforeClass");
     }
 
     /**
@@ -49,7 +49,7 @@ public class MobileTest {
      */
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod() {
-
+        System.out.println("Mobile Test -> beforeMethod");
     }
 
     /**
@@ -57,7 +57,7 @@ public class MobileTest {
      */
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
-
+        System.out.println("Mobile Test -> afterMethod");
     }
 
     /**
@@ -65,6 +65,7 @@ public class MobileTest {
      */
     @AfterClass(alwaysRun = true)
     public void afterClass() {
+        System.out.println("Mobile Test -> afterClass");
     }
 
     /**
@@ -75,7 +76,7 @@ public class MobileTest {
     @AfterSuite(alwaysRun = true)
     public void afterSuite() {
         // Stop appium client and server.
-        this.client.stop();
-        this.server.stop();
+        client.stop();
+        server.stop();
     }
 }

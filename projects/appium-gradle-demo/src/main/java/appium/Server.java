@@ -59,7 +59,7 @@ public class Server {
             System.out.println(error);
             throw new Exception(error);
         } else {
-            System.out.println("Appium Server is up and running!");
+            System.out.println("Appium server is up and running!");
         }
     }
 

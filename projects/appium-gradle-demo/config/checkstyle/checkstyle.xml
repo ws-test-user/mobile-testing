@@ -66,6 +66,7 @@ page at http://checkstyle.sourceforge.net/config.html -->
             <property name="allowMissingThrowsTags" value="false"/>
             <property name="allowThrowsTagsForSubclasses" value="false"/>
             <property name="allowUndeclaredRTE" value="false"/>
+            <property name="allowedAnnotations" value="Test, Override, Proxy"/>
         </module>
 
         <module name="JavadocType">
@@ -305,7 +306,7 @@ page at http://checkstyle.sourceforge.net/config.html -->
             <property name="severity" value="warning"/>
         </module>
 
-        <module name="RequireThis" />
+        <module name="RequireThis"/>
 
     </module>
 </module>
