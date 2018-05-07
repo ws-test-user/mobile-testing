@@ -14,23 +14,42 @@ import java.util.List;
 public class Calc {
     private AppiumDriver driver;
 
+    /**
+     * Init calculator object (calc app home page).
+     *
+     * @param driver appium driver.
+     */
     public Calc(AppiumDriver driver) {
         this.driver = driver;
     }
 
-    public void clickNumber(String number) {
-        String id = "net.ludeke.calculator:id/digit" + number;
+    /**
+     * Click number on the calculator.
+     *
+     * @param digit Digit enum value.
+     */
+    public void clickNumber(Digit digit) {
+        String id = "net.ludeke.calculator:id/digit" + digit;
         MobileElement num = (MobileElement) this.driver.findElementById(id);
         num.click();
-        System.out.println("Click " + number);
+        System.out.println("Click digit \"" + digit + "\" button.");
     }
 
-    public void performOperation(String operation) {
-        MobileElement op = (MobileElement) this.driver.findElementByAccessibilityId(operation);
+    /**
+     * Perform operation.
+     *
+     * @param operation Operation enum value.
+     */
+    public void performOperation(Operation operation) {
+        String id = String.format("net.ludeke.calculator:id/%s", operation);
+        MobileElement op = (MobileElement) this.driver.findElement(By.id(id));
         op.click();
-        System.out.println("Click " + operation);
+        System.out.println("Click " + operation.name() + " button.");
     }
 
+    /**
+     * Clean calculator.
+     */
     public void clean() {
         List<WebElement> buttons = this.driver
                 .findElementsById("net.ludeke.calculator:id/clear");
@@ -45,6 +64,11 @@ public class Calc {
         System.out.println("Clean the calculator.");
     }
 
+    /**
+     * Get current result.
+     *
+     * @return Current result as String (trimmed).
+     */
     public String getResult() {
         return this.driver
                 .findElement(By.className("android.widget.EditText"))

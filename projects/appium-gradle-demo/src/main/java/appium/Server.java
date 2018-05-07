@@ -3,6 +3,7 @@ package appium;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import settings.MobileSettings;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -13,14 +14,31 @@ import java.util.concurrent.TimeUnit;
 public class Server {
 
     private AppiumDriverLocalService service;
+    private MobileSettings settings;
 
-    public Server() {
+    /**
+     * Init appium server.
+     *
+     * @param settings Mobile settings.
+     */
+    public Server(MobileSettings settings) {
+        this.settings = settings;
     }
 
+    /**
+     * Get appium server service.
+     *
+     * @return appium server service.s
+     */
     public AppiumDriverLocalService getService() {
         return this.service;
     }
 
+    /**
+     * Start appium server.
+     *
+     * @throws Exception when fail to start appium server.
+     */
     public void start() throws Exception {
         // Set Appium server settings.
         AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder()
@@ -28,7 +46,7 @@ public class Server {
                 .usingAnyFreePort()
                 .withIPAddress("127.0.0.1")
                 .withStartUpTimeOut(180, TimeUnit.SECONDS)
-                .withArgument(GeneralServerFlag.LOG_LEVEL, "error");
+                .withArgument(GeneralServerFlag.LOG_LEVEL, this.settings.appiumServerLogLevel);
 
         // Start Appium server.
         this.service = AppiumDriverLocalService.buildService(serviceBuilder);
@@ -45,6 +63,9 @@ public class Server {
         }
     }
 
+    /**
+     * Stop appium server.
+     */
     public void stop() {
         try {
             this.service.stop();

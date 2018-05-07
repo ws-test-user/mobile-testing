@@ -20,4 +20,14 @@ public class OSUtils {
             return defaultValue;
         }
     }
+
+    /**
+     * Detect if Java debugger is attached.
+     *
+     * @return True if debugger is attached, false if not.
+     */
+    public static boolean isDebuggerAttached() {
+        return java.lang.management.ManagementFactory.getRuntimeMXBean().
+                getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
+    }
 }

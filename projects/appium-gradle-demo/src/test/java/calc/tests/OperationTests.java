@@ -1,8 +1,9 @@
 package calc.tests;
 
 import calc.base.CalcTest;
+import calc.pages.Digit;
+import calc.pages.Operation;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -11,31 +12,37 @@ import org.testng.annotations.Test;
 public class OperationTests extends CalcTest {
     @Test
     public void sumNumbers() {
-        this.calc.clickNumber("1");
-        this.calc.performOperation("plus");
-        this.calc.clickNumber("2");
-        this.calc.performOperation("equals");
+        this.calc.clickNumber(Digit.ONE);
+        this.calc.performOperation(Operation.PLUS);
+        this.calc.clickNumber(Digit.TWO);
+        this.calc.performOperation(Operation.EQUALS);
         Assert.assertEquals(this.calc.getResult(), "3", "Sum is not correct.");
     }
 
     @Test
     public void subtractNumbers() {
-        this.calc.clickNumber("9");
-        this.calc.performOperation("minus");
-        this.calc.clickNumber("8");
-        this.calc.performOperation("equals");
+        this.calc.clickNumber(Digit.NINE);
+        this.calc.performOperation(Operation.MINUS);
+        this.calc.clickNumber(Digit.EIGHT);
+        this.calc.performOperation(Operation.EQUALS);
         Assert.assertEquals(this.calc.getResult(), "1", "Subtract is not correct.");
     }
 
     @Test
-    @Ignore("Not Implemented.")
-    public void deviceNumbers() {
-
+    public void divideNumbers() {
+        this.calc.clickNumber(Digit.NINE);
+        this.calc.performOperation(Operation.DIVIDE);
+        this.calc.clickNumber(Digit.TREE);
+        this.calc.performOperation(Operation.EQUALS);
+        Assert.assertEquals(this.calc.getResult(), "3", "Divide is not correct.");
     }
 
     @Test
-    @Ignore("Not Implemented.")
     public void multiplyNumbers() {
-
+        this.calc.clickNumber(Digit.TWO);
+        this.calc.performOperation(Operation.MULTIPLY);
+        this.calc.clickNumber(Digit.TREE);
+        this.calc.performOperation(Operation.EQUALS);
+        Assert.assertEquals(this.calc.getResult(), "6", "Multiply is not correct.");
     }
 }
