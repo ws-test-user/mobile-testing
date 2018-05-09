@@ -34,9 +34,9 @@ public class Client {
     }
 
     /**
-     * Get appium driver.
+     * Get instance of current driver.
      *
-     * @return appium driver.
+     * @return AppiumDriver instance.
      */
     public AppiumDriver getDriver() {
         return this.driver;
@@ -67,7 +67,7 @@ public class Client {
         // Allow longer sessions if debugger is attached.
         if (OSUtils.isDebuggerAttached()) {
             // This will make debugging possible for 10min after session start.
-            cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, Duration.ofMinutes(10).getSeconds());
+            cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, Duration.ofMinutes(30).getSeconds());
         }
 
         // Initialize driver.

@@ -12,6 +12,7 @@ import java.time.Duration;
 public class MobileApp {
 
     private AppiumDriver driver;
+    private MobileSettings settings;
 
     /**
      * Initialize mobile app.
@@ -20,6 +21,7 @@ public class MobileApp {
      * @param driver   AppiumDriver object.
      */
     public MobileApp(MobileSettings settings, AppiumDriver driver) {
+        this.settings = settings;
         this.driver = driver;
     }
 
@@ -30,6 +32,15 @@ public class MobileApp {
      */
     public AppiumDriver getDriver() {
         return this.driver;
+    }
+
+    /**
+     * Get current settings.
+     *
+     * @return MobileSettings object.
+     */
+    public MobileSettings getSettings() {
+        return this.settings;
     }
 
     /**
