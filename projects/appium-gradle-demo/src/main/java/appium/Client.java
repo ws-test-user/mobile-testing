@@ -49,11 +49,20 @@ public class Client {
         DesiredCapabilities cap = new DesiredCapabilities();
 
         // Set capabilities based on settings.
-        cap.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
-        cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
-        cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.avd);
+        cap.setCapability(MobileCapabilityType.PLATFORM_NAME, this.settings.platform);
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, this.settings.deviceName);
         cap.setCapability(MobileCapabilityType.APP, this.settings.app);
+
+        // Set Android specific capabilities.
+        if (this.settings.platform == Platform.ANDROID) {
+            cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+            cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.avd);
+        }
+
+        // Set iOS specific capabilities.
+        if (this.settings.platform == Platform.IOS) {
+            cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
+        }
 
         // Allow longer sessions if debugger is attached.
         if (OSUtils.isDebuggerAttached()) {
