@@ -1,14 +1,14 @@
 package appium;
 
+import enums.PlatformType;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import settings.MobileSettings;
-import utils.OSUtils;
+import utils.OS;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -54,18 +54,18 @@ public class Client {
         cap.setCapability(MobileCapabilityType.APP, this.settings.app);
 
         // Set Android specific capabilities.
-        if (this.settings.platform == Platform.ANDROID) {
+        if (this.settings.platform == PlatformType.Android) {
             cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
             cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.avd);
         }
 
         // Set iOS specific capabilities.
-        if (this.settings.platform == Platform.IOS) {
+        if (this.settings.platform == PlatformType.iOS) {
             cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
         }
 
         // Allow longer sessions if debugger is attached.
-        if (OSUtils.isDebuggerAttached()) {
+        if (OS.isDebuggerAttached()) {
             // This will make debugging possible for 10min after session start.
             cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, Duration.ofMinutes(30).getSeconds());
         }

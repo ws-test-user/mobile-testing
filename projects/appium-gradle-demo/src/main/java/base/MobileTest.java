@@ -24,6 +24,7 @@ public abstract class MobileTest {
      */
     @BeforeSuite
     public void beforeSuite() throws Exception {
+
         // Init mobile settings.
         settings = new MobileSettings();
 
