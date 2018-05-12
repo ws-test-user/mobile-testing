@@ -1,11 +1,10 @@
 package appium;
 
-import enums.OSType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import settings.MobileSettings;
-import utils.Proc;
+import utils.OS;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,16 +40,23 @@ public class Server {
     /**
      * Start appium server.
      *
-     * @throws Exception when fail to start appium server.
+     * @throws Exception when fail to start Appium server.
      */
     public void start() throws Exception {
         // Set Appium server settings.
+
+        File node = OS.getExecutable("node",
+                OS.getenv("NODE_PATH", "/usr/local/bin/node"));
+
+        File appium = OS.getExecutable("appium",
+                OS.getenv("APPIUM_PATH", "/usr/local/bin/appium"));
+
         AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder()
-                .withLogFile(new File("appium-server.log"))
+                // .withLogFile(new File("appium-server.log"))
                 .usingAnyFreePort()
                 .withIPAddress("127.0.0.1")
-                .usingDriverExecutable(this.getNodeExecutable())
-                .withAppiumJS(this.getAppiumExecutable())
+                //.withAppiumJS(appium)
+                //.usingDriverExecutable(node)
                 .withStartUpTimeOut(180, TimeUnit.SECONDS)
                 .withArgument(GeneralServerFlag.LOG_LEVEL, this.settings.appiumServerLogLevel);
 
@@ -99,49 +105,5 @@ public class Server {
             System.out.println("Failed to create Appium log file.");
         }
         return logFile;
-    }
-
-    /**
-     * Get Appium executable file.
-     *
-     * @return Appium executable file.
-     * @throws Exception when Appium executable not found.
-     */
-    private File getAppiumExecutable() throws Exception {
-
-        // Find Appium path.
-        String appiumPath;
-        if (this.settings.hostOS == OSType.Windows) {
-            // TODO (dtopuzov): Try to use `where appium` or something else.
-            appiumPath = System.getenv("APPDATA") + "\\npm\\node_modules\\appium\\build\\lib\\main.js";
-        } else {
-            String[] command = {"which appium"};
-            appiumPath = Proc.start(command).trim();
-        }
-
-        // Check if exists
-        File appiumExecutable = new File(appiumPath);
-
-        // Log success or failure.
-        if (!appiumExecutable.exists()) {
-            String error = "Appium does not exist at: " + appiumPath;
-            System.out.println(error);
-            throw new Exception(error);
-        } else {
-            System.out.println("Appium Executable: " + appiumPath);
-        }
-
-        // Return Appium executable file.
-        return appiumExecutable;
-    }
-
-    /**
-     * Get NodeJS executable file.
-     *
-     * @return NodeJS executable file.
-     * @throws Exception when NodeJS executable not found.
-     */
-    private File getNodeExecutable() {
-        return new File("");
     }
 }
