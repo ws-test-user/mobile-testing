@@ -53,14 +53,14 @@ public class Client {
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, this.settings.deviceName);
         cap.setCapability(MobileCapabilityType.APP, this.settings.app);
 
-        // Set Android specific capabilities.
-        if (this.settings.platform == PlatformType.Android) {
+        // Set ANDROID specific capabilities.
+        if (this.settings.platform == PlatformType.ANDROID) {
             cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
             cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.avd);
         }
 
-        // Set iOS specific capabilities.
-        if (this.settings.platform == PlatformType.iOS) {
+        // Set IOS specific capabilities.
+        if (this.settings.platform == PlatformType.IOS) {
             cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
         }
 

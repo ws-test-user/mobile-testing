@@ -1,7 +1,6 @@
 package utils;
 
 import enums.OSType;
-import exceptions.UnknownOSException;
 
 import java.io.*;
 import java.util.Arrays;
@@ -10,6 +9,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Wrapper for running and stopping processes.
+ */
 public class Proc {
 
     private static final String[] WIN_RUNTIME = {"cmd.exe", "/C"};
@@ -25,14 +27,12 @@ public class Proc {
      *                or leave it running on background.
      * @return process output as String.
      * @throws IOException          when fail to read process output.
-     * @throws InterruptedException when fail to wait for the process to complete.
      * @throws TimeoutException     when process fail to complete is specified timeout.
-     * @throws UnknownOSException   when can not determine operating system type.
      */
-    public static String start(String[] command, int timeout, boolean wait) throws IOException, InterruptedException, TimeoutException, UnknownOSException {
+    public static String start(String[] command, int timeout, boolean wait) throws IOException, TimeoutException {
 
         String[] finalCommand;
-        if (OS.getOSType() == OSType.Windows) {
+        if (OS.getOSType() == OSType.WINDOWS) {
             finalCommand = concat(WIN_RUNTIME, command);
         } else {
             finalCommand = concat(UNIX_RUNTIME, command);
@@ -40,7 +40,11 @@ public class Proc {
 
         java.lang.Process p = new ProcessBuilder(finalCommand).start();
 
-        p.waitFor(timeout, TimeUnit.SECONDS);
+        try {
+            p.waitFor(timeout, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            System.out.println("Failed to wait for process.");
+        }
 
         InputStream error = p.getErrorStream();
         InputStream input = p.getInputStream();
@@ -68,11 +72,9 @@ public class Proc {
      *                or leave it running on background.
      * @return process output as String.
      * @throws IOException          when fail to read process output.
-     * @throws InterruptedException when fail to wait for the process to complete.
      * @throws TimeoutException     when process fail to complete in 30 seconds.
-     * @throws UnknownOSException   when can not determine operating system type.
      */
-    public static String start(String[] command, boolean wait) throws IOException, InterruptedException, TimeoutException, UnknownOSException {
+    public static String start(String[] command, boolean wait) throws IOException, TimeoutException {
         return start(command, 30, wait);
     }
 
@@ -83,11 +85,9 @@ public class Proc {
      * @param timeout timeout in seconds.
      * @return process output as String.
      * @throws IOException          when fail to read process output.
-     * @throws InterruptedException when fail to wait for the process to complete.
      * @throws TimeoutException     when process fail to complete is specified timeout.
-     * @throws UnknownOSException   when can not determine operating system type.
      */
-    public static String start(String[] command, int timeout) throws IOException, InterruptedException, TimeoutException, UnknownOSException {
+    public static String start(String[] command, int timeout) throws IOException, TimeoutException {
         return start(command, timeout, true);
     }
 
@@ -97,11 +97,9 @@ public class Proc {
      * @param command command (including options).
      * @return process output as String.
      * @throws IOException          when fail to read process output.
-     * @throws InterruptedException when fail to wait for the process to complete.
      * @throws TimeoutException     when process fail to complete in 30 seconds.
-     * @throws UnknownOSException   when can not determine operating system type.
      */
-    public static String start(String[] command) throws IOException, InterruptedException, TimeoutException, UnknownOSException {
+    public static String start(String[] command) throws IOException, TimeoutException {
         return start(command, 30, true);
     }
 

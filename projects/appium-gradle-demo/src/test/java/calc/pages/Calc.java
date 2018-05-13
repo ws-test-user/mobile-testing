@@ -33,7 +33,7 @@ public class Calc extends MobileApp {
      */
     public void clickNumber(Digit digit) {
         String id;
-        if (this.getSettings().platform == PlatformType.Android) {
+        if (this.getSettings().platform == PlatformType.ANDROID) {
             id = "net.ludeke.calculator:id/digit" + digit;
         } else {
             id = digit.toString();
@@ -50,7 +50,7 @@ public class Calc extends MobileApp {
      */
     public void performOperation(Operation operation) {
         String id;
-        if (this.getSettings().platform == PlatformType.Android) {
+        if (this.getSettings().platform == PlatformType.ANDROID) {
             id = String.format("net.ludeke.calculator:id/%s", operation);
         } else {
             if (operation == Operation.PLUS) {
@@ -74,7 +74,7 @@ public class Calc extends MobileApp {
      * Clean calculator.
      */
     public void clean() {
-        if (this.getSettings().platform == PlatformType.Android) {
+        if (this.getSettings().platform == PlatformType.ANDROID) {
             List buttons = this.getDriver()
                     .findElements(By.id("net.ludeke.calculator:id/clear"));
             if (buttons.size() > 0) {
@@ -98,7 +98,7 @@ public class Calc extends MobileApp {
      */
     public String getResult() {
         By locator;
-        if (this.getSettings().platform == PlatformType.Android) {
+        if (this.getSettings().platform == PlatformType.ANDROID) {
             locator = By.className("android.widget.EditText");
         } else {
             locator = By.className("XCUIElementTypeStaticText");

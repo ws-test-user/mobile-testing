@@ -19,11 +19,11 @@ public class OS {
     public static OSType getOSType() {
         String osTypeString = System.getProperty("os.name", "generic").toLowerCase();
         if ((osTypeString.contains("mac")) || (osTypeString.contains("darwin"))) {
-            return OSType.MacOS;
+            return OSType.MAC;
         } else if (osTypeString.contains("win")) {
-            return OSType.Windows;
+            return OSType.WINDOWS;
         } else if (osTypeString.contains("nux")) {
-            return OSType.Linux;
+            return OSType.LINUX;
         } else {
             return null;
         }
@@ -55,7 +55,7 @@ public class OS {
      */
     public static File getExecutable(String command, String defaultPath) throws FileNotFoundException {
         String findCommand;
-        if (OS.getOSType() == OSType.Windows) {
+        if (OS.getOSType() == OSType.WINDOWS) {
             findCommand = "where";
         } else {
             findCommand = "which";
@@ -99,7 +99,7 @@ public class OS {
             System.out.println(error);
             throw new FileNotFoundException(error);
         } else {
-            System.out.println(String.format("%s found at %s", executable, executablePath));
+            System.out.println(String.format("%s found at %s", command, executablePath));
         }
 
         // Return executable file.

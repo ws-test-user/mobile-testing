@@ -52,11 +52,11 @@ public class Server {
                 OS.getenv("APPIUM_PATH", "/usr/local/bin/appium"));
 
         AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder()
-                // .withLogFile(new File("appium-server.log"))
+                .withLogFile(new File("appium-server.log"))
                 .usingAnyFreePort()
                 .withIPAddress("127.0.0.1")
-                //.withAppiumJS(appium)
-                //.usingDriverExecutable(node)
+                .withAppiumJS(appium)
+                .usingDriverExecutable(node)
                 .withStartUpTimeOut(180, TimeUnit.SECONDS)
                 .withArgument(GeneralServerFlag.LOG_LEVEL, this.settings.appiumServerLogLevel);
 
