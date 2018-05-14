@@ -132,7 +132,7 @@ public abstract class MobileTest {
             String logcat = getAdbLog();
             String logFile = String.format("%s_%s.log", settings.deviceName, testName);
             Files.write(Paths.get(logFile), logcat.getBytes());
-            System.out.println("Device logs saved in " + pageSourceFileName);
+            System.out.println("Device logs saved in " + logFile);
         }
     }
 

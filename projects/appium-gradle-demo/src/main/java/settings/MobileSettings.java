@@ -25,7 +25,8 @@ public class MobileSettings {
 
 
         this.platform = PlatformType.ANDROID;
-        this.app = "https://github.com/dtopuzov/mobile-testing/raw/master/testapps/Calculator_2.0.apk";
+        // this.app = "https://github.com/dtopuzov/mobile-testing/raw/master/testapps/Calculator_2.0.apk";
+        this.app = "https://github.com/dtopuzov/mobile-testing/raw/master/testapps/selendroid-test-app-0.11.0.apk";
         this.avd = "Emulator-Api23-Default";
         this.deviceName = "Emulator-Api23-Default";
         this.platformVersion = "6.0";
