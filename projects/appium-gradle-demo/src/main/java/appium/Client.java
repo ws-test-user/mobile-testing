@@ -7,7 +7,7 @@ import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import settings.MobileSettings;
+import settings.Settings;
 import utils.OS;
 
 import java.time.Duration;
@@ -20,7 +20,7 @@ public class Client {
 
     private AppiumDriver driver;
     private AppiumDriverLocalService service;
-    private MobileSettings settings;
+    private Settings settings;
 
     /**
      * Instantiate new appium client.
@@ -28,7 +28,7 @@ public class Client {
      * @param service  Appium server service.
      * @param settings Mobile settings.
      */
-    public Client(AppiumDriverLocalService service, MobileSettings settings) {
+    public Client(AppiumDriverLocalService service, Settings settings) {
         this.service = service;
         this.settings = settings;
     }
@@ -51,12 +51,19 @@ public class Client {
         // Set capabilities based on settings.
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, this.settings.platform);
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, this.settings.deviceName);
-        cap.setCapability(MobileCapabilityType.APP, this.settings.app);
+        if (this.settings.app.appPath != null) {
+            cap.setCapability(MobileCapabilityType.APP, this.settings.app.appPath);
+        }
+        if (this.settings.deviceId != null) {
+            cap.setCapability(MobileCapabilityType.UDID, this.settings.deviceId);
+        }
 
         // Set ANDROID specific capabilities.
         if (this.settings.platform == PlatformType.ANDROID) {
             cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
-            cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.avd);
+            if (this.settings.android.avdName != null) {
+                cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.android.avdName);
+            }
         }
 
         // Set IOS specific capabilities.
@@ -76,8 +83,8 @@ public class Client {
         System.out.println("Appium driver session initialized.");
 
         // Set default implicit wait.
-        this.driver.manage().timeouts().implicitlyWait(this.settings.findTimeout, TimeUnit.SECONDS);
-        System.out.println("Set default implicit wait of " + String.valueOf(this.settings.findTimeout) + " seconds.");
+        this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        System.out.println("Set default implicit wait of 10 seconds.");
     }
 
     /**

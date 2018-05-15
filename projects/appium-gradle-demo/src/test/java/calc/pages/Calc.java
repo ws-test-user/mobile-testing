@@ -6,7 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import settings.MobileSettings;
+import settings.Settings;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class Calc extends MobileApp {
      * @param settings mobile settings.
      * @param driver   appium driver.
      */
-    public Calc(MobileSettings settings, AppiumDriver driver) {
+    public Calc(Settings settings, AppiumDriver driver) {
         super(settings, driver);
     }
 

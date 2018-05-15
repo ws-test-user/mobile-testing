@@ -2,7 +2,7 @@ package base;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.ScreenOrientation;
-import settings.MobileSettings;
+import settings.Settings;
 
 import java.time.Duration;
 
@@ -12,15 +12,15 @@ import java.time.Duration;
 public class MobileApp {
 
     private AppiumDriver driver;
-    private MobileSettings settings;
+    private Settings settings;
 
     /**
      * Initialize mobile app.
      *
-     * @param settings MobileSettings object.
+     * @param settings Settings object.
      * @param driver   AppiumDriver object.
      */
-    public MobileApp(MobileSettings settings, AppiumDriver driver) {
+    public MobileApp(Settings settings, AppiumDriver driver) {
         this.settings = settings;
         this.driver = driver;
     }
@@ -37,9 +37,9 @@ public class MobileApp {
     /**
      * Get current settings.
      *
-     * @return MobileSettings object.
+     * @return Settings object.
      */
-    public MobileSettings getSettings() {
+    public Settings getSettings() {
         return this.settings;
     }
 

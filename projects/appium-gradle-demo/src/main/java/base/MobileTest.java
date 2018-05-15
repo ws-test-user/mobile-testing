@@ -8,7 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.logging.LogEntry;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import settings.MobileSettings;
+import settings.Settings;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -32,7 +32,7 @@ public abstract class MobileTest {
 
     private static Server server;
     protected static Client client;
-    protected static MobileSettings settings;
+    protected static Settings settings;
 
     /**
      * Before suite logic.
@@ -46,7 +46,7 @@ public abstract class MobileTest {
     public void beforeSuite() throws Exception {
 
         // Init mobile settings.
-        settings = new MobileSettings();
+        settings = new Settings();
 
         // Start appium server.
         server = new Server(settings);

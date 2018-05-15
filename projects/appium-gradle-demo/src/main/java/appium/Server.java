@@ -3,7 +3,7 @@ package appium;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
-import settings.MobileSettings;
+import settings.Settings;
 import utils.OS;
 
 import java.io.File;
@@ -17,14 +17,14 @@ import java.util.concurrent.TimeUnit;
 public class Server {
 
     private AppiumDriverLocalService service;
-    private MobileSettings settings;
+    private Settings settings;
 
     /**
      * Init appium server.
      *
      * @param settings Mobile settings.
      */
-    public Server(MobileSettings settings) {
+    public Server(Settings settings) {
         this.settings = settings;
     }
 
@@ -52,13 +52,13 @@ public class Server {
                 OS.getenv("APPIUM_PATH", "/usr/local/bin/appium"));
 
         AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder()
-                .withLogFile(new File("appium-server.log"))
+                .withLogFile(this.createLogFile())
                 .usingAnyFreePort()
                 .withIPAddress("127.0.0.1")
                 .withAppiumJS(appium)
                 .usingDriverExecutable(node)
-                .withStartUpTimeOut(180, TimeUnit.SECONDS)
-                .withArgument(GeneralServerFlag.LOG_LEVEL, this.settings.appiumServerLogLevel);
+                .withStartUpTimeOut(60, TimeUnit.SECONDS)
+                .withArgument(GeneralServerFlag.LOG_LEVEL, "error");
 
         // Start Appium server.
         this.service = AppiumDriverLocalService.buildService(serviceBuilder);
@@ -94,15 +94,15 @@ public class Server {
      * @throws IOException When fail to create log file.
      */
     private File createLogFile() throws IOException {
-        File logFile = new File("appium-server.log");
+        File logFile = new File(this.settings.logsPath + File.separator + "appium-server.log");
         Files.deleteIfExists(logFile.toPath());
         logFile.getParentFile().mkdirs();
         boolean createLogFileResult = logFile.createNewFile();
 
         if (createLogFileResult) {
-            System.out.println("Appium log file created.");
+            System.out.println("Appium log file created: " + logFile.getAbsolutePath());
         } else {
-            System.out.println("Failed to create Appium log file.");
+            System.out.println("Failed to create log file: " + logFile.getAbsolutePath());
         }
         return logFile;
     }
