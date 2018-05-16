@@ -1,5 +1,30 @@
 # HowTos
 
+## Measure startup time 
+Run those commands:
+```
+$ANDROID_HOME/platform-tools/adb logcat -c
+$ANDROID_HOME/platform-tools/adb shell monkey -p <packageID> -c android.intent.category.LAUNCHER 1
+$ANDROID_HOME/platform-tools/adb logcat | grep Displayed
+```
+Result will be something like:
+```
+05-16 18:47:58.227  1679  1702 I ActivityManager: Displayed com.activtrades.app/.ui.login.LoginActivity: +487ms
+```
+Which means app starts in 487ms.
+
+Tips:
+Get current package id and activity:
+```
+$ANDROID_HOME/platform-tools/adb shell dumpsys window windows | grep mCurrentFocus
+```
+Result will be something like:
+```
+  mCurrentFocus=Window{b07ffb8 u0 com.activtrades.app/com.activtrades.app.ui.login.LoginActivity}
+```
+Package ID is `com.activtrades.app`.
+Activity is `com.activtrades.app.ui.login.LoginActivity`
+
 ## Check for code style and errors
 
 [Checkstyle](https://docs.gradle.org/current/userguide/checkstyle_plugin.html) is used to check code style.

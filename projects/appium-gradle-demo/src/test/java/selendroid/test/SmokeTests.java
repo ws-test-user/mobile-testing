@@ -9,20 +9,39 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import selendroid.pages.HomePage;
 
+import java.io.IOException;
+
+/**
+ * Selendroid application smoke tests.
+ */
 public class SmokeTests extends MobileTest {
 
     private HomePage home;
 
+    /**
+     * Init HomePage object before all tests in this class.
+     */
     @BeforeClass
-    public void beforeTests() {
-        home = new HomePage(client.getDriver());
+    public void beforeClass() {
+        home = new HomePage(settings, client.getDriver());
+    }
+
+    /**
+     * Restart application before each test (to start from clean state).
+     */
+    @BeforeMethod
+    public void beforeTest() {
+        client.getDriver().resetApp();
     }
 
     @Test
     public void checkBoxTest() {
+        // With getAttribute() you can check any property
+        // you see in uiautomatorviewer.
         boolean currentState = Boolean.valueOf(home
                 .checkBox.getAttribute("checked"));
         Assert.assertTrue(currentState);
@@ -34,9 +53,16 @@ public class SmokeTests extends MobileTest {
     }
 
     @Test
-    public void handlePopWindows() {
+    public void handlePopWindows() throws IOException {
+
+        // Verify UI before popup
+        this.home.waitForScreen("homeScreen");
+
         // Click the button to show popup windows
         home.popupWindowButton.click();
+
+        // Verify UI after popup
+        this.home.waitForScreen("homeScreenWithPopup");
 
         // handle popup window
 
@@ -70,8 +96,13 @@ public class SmokeTests extends MobileTest {
         home.toastButton.click();
 
         // Wait until toast element is present.
-        WebDriverWait wait = new WebDriverWait(client.getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(client.getDriver(), 30);
         By toastLocator = By.xpath("//*[@text='Hello selendroid toast!']");
         wait.until(ExpectedConditions.presenceOfElementLocated(toastLocator));
+    }
+
+    @Test
+    public void verifyUI() throws IOException {
+        this.home.waitForScreen("homeScreen");
     }
 }

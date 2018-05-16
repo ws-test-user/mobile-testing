@@ -17,7 +17,7 @@ public class AppSettings {
      */
     public AppSettings(Properties properties) {
         this.appName = properties.getProperty("appName", null);
-        this.appPath = properties.getProperty("appId", null);
+        this.appId = properties.getProperty("appId", null);
         this.appPath = properties.getProperty("appPath", null);
     }
 }

@@ -1,22 +1,36 @@
 package selendroid.pages;
 
+import base.MobilePage;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.iOSFindBy;
+import settings.Settings;
 
-public class HomePage {
+/**
+ * Selendroid application home page.
+ */
+public class HomePage extends MobilePage {
 
-    @FindBy(id = "io.selendroid.testapp:id/input_adds_check_box")
-    public WebElement checkBox;
+    @AndroidFindBy(id = "io.selendroid.testapp:id/input_adds_check_box")
+    @iOSFindBy(id = "")
+    public MobileElement checkBox;
 
-    @FindBy(id = "io.selendroid.testapp:id/showPopupWindowButton")
-    public WebElement popupWindowButton;
+    @AndroidFindBy(id = "io.selendroid.testapp:id/showPopupWindowButton")
+    @iOSFindBy(id = "")
+    public MobileElement popupWindowButton;
 
-    @FindBy(id = "io.selendroid.testapp:id/showToastButton")
-    public WebElement toastButton;
+    @AndroidFindBy(id = "io.selendroid.testapp:id/showToastButton")
+    @iOSFindBy(id = "")
+    public MobileElement toastButton;
 
-    public HomePage(AppiumDriver driver) {
-        PageFactory.initElements(driver, this);
+    /**
+     * Init home page.
+     *
+     * @param settings Settings object.
+     * @param driver   AppiumDriver object.
+     */
+    public HomePage(Settings settings, AppiumDriver driver) {
+        super(settings, driver);
     }
 }

@@ -8,6 +8,12 @@ This project is work in progress!
 
 ## Run Tests
 
+### Run via IDE
+Specify config in VM Options:
+```
+-Dconfig=selendroid.emu.api19
+```
+
 ## Additional Resources
 
 [Tips, Trick and Howtos](Howtos.md)

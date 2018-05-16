@@ -57,12 +57,22 @@ public class Client {
         if (this.settings.deviceId != null) {
             cap.setCapability(MobileCapabilityType.UDID, this.settings.deviceId);
         }
+        if (this.settings.app.appId != null) {
+            cap.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, this.settings.app.appId);
+        }
 
         // Set ANDROID specific capabilities.
         if (this.settings.platform == PlatformType.ANDROID) {
-            cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+            if (this.settings.platformVersion < 5.0) {
+                cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.APPIUM);
+            } else {
+                cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+            }
             if (this.settings.android.avdName != null) {
                 cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.android.avdName);
+            }
+            if (this.settings.android.defaultActivity != null) {
+                cap.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, this.settings.android.defaultActivity);
             }
         }
 

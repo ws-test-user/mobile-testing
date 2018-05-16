@@ -71,6 +71,7 @@ public class Settings {
         System.out.println("[Mobile Device] Mobile Device Id: " + this.deviceId);
         System.out.println("[Android] AVD Image: " + this.android.avdName);
         System.out.println("[Android] AVD Start Options: " + this.android.avdOptions);
+        System.out.println("[Android] Default Activity: " + this.android.defaultActivity);
         System.out.println("[App] Test App Name: " + this.app.appName);
         System.out.println("[App] Test App Id: " + this.app.appId);
         System.out.println("[App] Test App Path: " + this.app.appPath);

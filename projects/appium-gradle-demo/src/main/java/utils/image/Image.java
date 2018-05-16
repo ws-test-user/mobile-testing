@@ -93,6 +93,11 @@ public class Image {
      * @throws IOException When save operation fails.
      */
     public static void save(BufferedImage image, String filePath) throws IOException {
+        File parentFolder = new File(filePath).getParentFile();
+        if (!parentFolder.exists()) {
+            System.out.println(parentFolder.getAbsolutePath() + " does NOT exist. Creating it right now.");
+            parentFolder.mkdirs();
+        }
         ImageIO.write(image, "png", new File(filePath));
     }
 
