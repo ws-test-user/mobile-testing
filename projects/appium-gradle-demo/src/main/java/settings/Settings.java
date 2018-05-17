@@ -23,7 +23,7 @@ public class Settings {
 
     public OSType hostOS;
     public PlatformType platform;
-    public Double platformVersion;
+    public String platformVersion;
     public DeviceType deviceType;
     public String deviceName;
     public String deviceId;
@@ -54,7 +54,7 @@ public class Settings {
 
         this.hostOS = OS.getOSType();
         this.platform = this.getPlatformType();
-        this.platformVersion = Double.parseDouble(this.properties.getProperty("platformVersion", null));
+        this.platformVersion = this.properties.getProperty("platformVersion", null);
         this.deviceName = this.properties.getProperty("deviceName", "Unknown Device");
         this.deviceId = this.properties.getProperty("deviceId", null);
         this.deviceType = this.getDeviceType();
@@ -118,5 +118,23 @@ public class Settings {
         } else {
             throw new Exception("Unknown PlatformType.");
         }
+    }
+
+    public boolean platformVersionIsLessThan(String version) {
+        return convertAndroidVersionToInt(platformVersion) < convertAndroidVersionToInt(version);
+    }
+
+    private int convertAndroidVersionToInt(String version) {
+        int newPlatformVersion = Integer.valueOf(version.replaceAll("\\.", ""));
+
+        // if platformVersion is filled in config file in format X
+        if (newPlatformVersion < 10) {
+            newPlatformVersion = newPlatformVersion * 100;
+            // if platformVersion is filled in config file in format X.X
+        } else if (newPlatformVersion < 100) {
+            newPlatformVersion = newPlatformVersion * 10;
+        }
+
+        return newPlatformVersion;
     }
 }

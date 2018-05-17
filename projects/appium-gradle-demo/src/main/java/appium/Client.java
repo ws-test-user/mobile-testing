@@ -63,7 +63,7 @@ public class Client {
 
         // Set ANDROID specific capabilities.
         if (this.settings.platform == PlatformType.ANDROID) {
-            if (this.settings.platformVersion < 5.0) {
+            if (this.settings.platformVersionIsLessThan("5.0")) {
                 cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.APPIUM);
             } else {
                 cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
