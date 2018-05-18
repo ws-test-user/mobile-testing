@@ -1,6 +1,6 @@
-package activetrades.tests;
+package activtrades.tests;
 
-import activetrades.pages.LoginPage;
+import activtrades.pages.LoginPage;
 import base.MobileTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

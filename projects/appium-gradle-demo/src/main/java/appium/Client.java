@@ -3,7 +3,6 @@ package appium;
 import enums.PlatformType;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
-import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -51,6 +50,9 @@ public class Client {
         // Set capabilities based on settings.
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, this.settings.platform);
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, this.settings.deviceName);
+        cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, this.settings.platformVersion);
+        cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, this.settings.automationName);
+
         if (this.settings.app.appPath != null) {
             cap.setCapability(MobileCapabilityType.APP, this.settings.app.appPath);
         }
@@ -63,11 +65,6 @@ public class Client {
 
         // Set ANDROID specific capabilities.
         if (this.settings.platform == PlatformType.ANDROID) {
-            if (this.settings.platformVersionIsLessThan("5.0")) {
-                cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.APPIUM);
-            } else {
-                cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
-            }
             if (this.settings.android.avdName != null) {
                 cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.android.avdName);
             }
@@ -77,9 +74,6 @@ public class Client {
         }
 
         // Set IOS specific capabilities.
-        if (this.settings.platform == PlatformType.IOS) {
-            cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
-        }
 
         // Allow longer sessions if debugger is attached.
         if (OS.isDebuggerAttached()) {

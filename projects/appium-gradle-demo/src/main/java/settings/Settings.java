@@ -3,6 +3,7 @@ package settings;
 import enums.DeviceType;
 import enums.OSType;
 import enums.PlatformType;
+import io.appium.java_client.remote.AutomationName;
 import utils.OS;
 
 import java.io.File;
@@ -24,10 +25,12 @@ public class Settings {
     public OSType hostOS;
     public PlatformType platform;
     public String platformVersion;
+    public String automationName;
     public DeviceType deviceType;
     public String deviceName;
     public String deviceId;
 
+    public AppiumSettings appium;
     public AppSettings app;
     public WebSettings web;
     public AndroidSettings android;
@@ -55,6 +58,7 @@ public class Settings {
         this.hostOS = OS.getOSType();
         this.platform = this.getPlatformType();
         this.platformVersion = this.properties.getProperty("platformVersion", null);
+        this.automationName = this.getAutomationType();
         this.deviceName = this.properties.getProperty("deviceName", "Unknown Device");
         this.deviceId = this.properties.getProperty("deviceId", null);
         this.deviceType = this.getDeviceType();
@@ -77,6 +81,7 @@ public class Settings {
         System.out.println("[App] Test App Path: " + this.app.appPath);
         System.out.println("[Web] Browser: " + this.web.browser);
         System.out.println("[Web] Base URL: " + this.web.baseURL);
+        System.out.println("[Appium] Automation Name:" + this.automationName);
         System.out.println("[Logs] Log files location: " + this.logsPath);
         System.out.println("[Logs] Screenshots location: " + this.screenshotsPath);
         System.out.println("[Other] Debug mode: " + this.debug);
@@ -109,6 +114,35 @@ public class Settings {
         }
     }
 
+    private String getAutomationType() throws Exception {
+        String automation = this.properties.getProperty("automationName", null).toLowerCase();
+        if (automation != null) {
+            return automation;
+        } else {
+            if (this.platform == PlatformType.IOS) {
+                return AutomationName.IOS_XCUI_TEST;
+            } else {
+                if (this.platformVersionIsLessThan("4.2")) {
+                    return AutomationName.SELENDROID;
+                } else if (this.platformVersionIsLessThan("5.0")) {
+                    return AutomationName.APPIUM;
+                } else {
+                    return AutomationName.ANDROID_UIAUTOMATOR2;
+                }
+            }
+        }
+    }
+
+    /**
+     * Check if platform version is less than some version.
+     *
+     * @param version as String(for example: 7.1.1).
+     * @return true if actual version is less than specified version.
+     */
+    public boolean platformVersionIsLessThan(String version) {
+        return convertAndroidVersionToInt(platformVersion) < convertAndroidVersionToInt(version);
+    }
+
     private PlatformType getPlatformType() throws Exception {
         String platformType = this.properties.getProperty("platform", "android").toLowerCase();
         if (platformType.contains("android")) {
@@ -118,10 +152,6 @@ public class Settings {
         } else {
             throw new Exception("Unknown PlatformType.");
         }
-    }
-
-    public boolean platformVersionIsLessThan(String version) {
-        return convertAndroidVersionToInt(platformVersion) < convertAndroidVersionToInt(version);
     }
 
     private int convertAndroidVersionToInt(String version) {

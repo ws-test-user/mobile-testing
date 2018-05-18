@@ -6,10 +6,10 @@ print_and_execute() {
 }
 
 echo "Update Android Emulator Images"
-print_and_execute "system-images;android-27;google_apis;x86"
-print_and_execute "system-images;android-26;google_apis;x86"
-print_and_execute "system-images;android-25;google_apis;x86"
-print_and_execute "system-images;android-24;default;x86"
+print_and_execute "system-images;android-27;google_apis_playstore;x86"
+print_and_execute "system-images;android-26;google_apis_playstore;x86"
+print_and_execute "system-images;android-25;google_apis_playstore;x86"
+print_and_execute "system-images;android-24;google_apis_playstore;x86"
 print_and_execute "system-images;android-23;default;x86"
 print_and_execute "system-images;android-22;default;x86"
 print_and_execute "system-images;android-21;default;x86"

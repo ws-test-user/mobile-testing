@@ -1,4 +1,4 @@
-package activetrades.pages;
+package activtrades.pages;
 
 import base.MobilePage;
 import io.appium.java_client.AppiumDriver;
