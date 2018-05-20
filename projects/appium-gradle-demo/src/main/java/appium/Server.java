@@ -1,5 +1,6 @@
 package appium;
 
+import enums.OSType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
@@ -50,6 +51,12 @@ public class Server {
 
         File appium = OS.getExecutable("appium",
                 OS.getenv("APPIUM_PATH", "/usr/local/bin/appium"));
+
+        // Temp hack for windows/
+        if (this.settings.hostOS == OSType.WINDOWS) {
+            String appiumPath = System.getenv("APPDATA") + "\\npm\\node_modules\\appium\\build\\lib\\main.js";
+            appium = new File(appiumPath);
+        }
 
         AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder()
                 .withLogFile(this.createLogFile())
