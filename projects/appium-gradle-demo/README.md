@@ -16,7 +16,7 @@ Specify config in VM Options:
 
 ## Additional Resources
 
-[Tips, Trick and Howtos](Howtos.md)
+[Tips, Trick and Howtos](docs)
 
 [Appium Docs](https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/mobile-web.md)
 
