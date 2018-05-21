@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import settings.Settings;
 import utils.OS;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -59,17 +60,22 @@ public class Client {
         if (this.settings.deviceId != null) {
             cap.setCapability(MobileCapabilityType.UDID, this.settings.deviceId);
         }
-        if (this.settings.app.appId != null) {
-            cap.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, this.settings.app.appId);
+        if (this.settings.web.browser != null) {
+            String path = this.settings.projectRoot + File.separator + "lib" + File.separator + "chromedriver";
+            cap.setCapability("chromedriverExecutableDir", path);
+            cap.setCapability(MobileCapabilityType.BROWSER_NAME, this.settings.web.browser);
         }
 
         // Set ANDROID specific capabilities.
         if (this.settings.platform == PlatformType.ANDROID) {
-            if (this.settings.android.avdName != null) {
-                cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.android.avdName);
+            if (this.settings.app.appId != null) {
+                cap.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, this.settings.app.appId);
             }
             if (this.settings.android.defaultActivity != null) {
                 cap.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, this.settings.android.defaultActivity);
+            }
+            if (this.settings.android.avdName != null) {
+                cap.setCapability(AndroidMobileCapabilityType.AVD, this.settings.android.avdName);
             }
         }
 

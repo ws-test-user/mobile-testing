@@ -17,7 +17,7 @@ import static java.lang.System.getProperty;
  */
 public class Settings {
 
-    private final String projectRoot = getProperty("user.dir");
+    public final String projectRoot = getProperty("user.dir");
     private final String testResultsRoot = projectRoot + File.separator + "build" + File.separator + "test-results";
 
     private Properties properties;
@@ -115,7 +115,7 @@ public class Settings {
     }
 
     private String getAutomationType() throws Exception {
-        String automation = this.properties.getProperty("automationName", null).toLowerCase();
+        String automation = this.properties.getProperty("automationName", null);
         if (automation != null) {
             return automation;
         } else {

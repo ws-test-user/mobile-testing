@@ -17,7 +17,7 @@ public class WebSettings {
      * @param properties Properties object.
      */
     public WebSettings(Properties properties) {
-        this.browser = properties.getProperty("browser", BrowserType.CHROME);
-        this.baseURL = properties.getProperty("baseURL", null);
+        this.browser = properties.getProperty("browserType", BrowserType.CHROME);
+        this.baseURL = properties.getProperty("baseUrl", null);
     }
 }

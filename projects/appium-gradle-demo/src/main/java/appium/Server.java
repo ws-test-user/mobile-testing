@@ -44,20 +44,22 @@ public class Server {
      * @throws Exception when fail to start Appium server.
      */
     public void start() throws Exception {
-        // Set Appium server settings.
-
+        // Find NodeJS executable.
         File node = OS.getExecutable("node",
                 OS.getenv("NODE_PATH", "/usr/local/bin/node"));
 
-        File appium = OS.getExecutable("appium",
-                OS.getenv("APPIUM_PATH", "/usr/local/bin/appium"));
-
-        // Temp hack for windows/
+        // Find appium executable.
+        File appium;
         if (this.settings.hostOS == OSType.WINDOWS) {
+            // TODO: Do not hardcode paths.
             String appiumPath = System.getenv("APPDATA") + "\\npm\\node_modules\\appium\\build\\lib\\main.js";
             appium = new File(appiumPath);
+        } else {
+            appium = OS.getExecutable("appium",
+                    OS.getenv("APPIUM_PATH", "/usr/local/bin/appium"));
         }
 
+        // Create AppiumServiceBuilder
         AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder()
                 .withLogFile(this.createLogFile())
                 .usingAnyFreePort()
