@@ -1,7 +1,5 @@
 package settings;
 
-import org.openqa.selenium.remote.BrowserType;
-
 import java.util.Properties;
 
 /**
@@ -17,7 +15,7 @@ public class WebSettings {
      * @param properties Properties object.
      */
     public WebSettings(Properties properties) {
-        this.browser = properties.getProperty("browserType", BrowserType.CHROME);
+        this.browser = properties.getProperty("browserType", null);
         this.baseURL = properties.getProperty("baseUrl", null);
     }
 }
