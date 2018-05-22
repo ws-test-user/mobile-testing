@@ -38,5 +38,6 @@ public class HomePage extends MobilePage {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.xpath("//a[contains(@href, '" + linkText + "')]")));
+        System.out.println(linkText + " exists in results.");
     }
 }
