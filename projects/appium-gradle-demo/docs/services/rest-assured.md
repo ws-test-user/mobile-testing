@@ -1,5 +1,13 @@
 # Web Services
 
+## Tutorials and Demos:
+
+[REST Services](https://www.youtube.com/watch?v=8O1tdxFVScM)
+
+[SOAP Services](https://www.youtube.com/watch?v=oQdzXv6eH6E)
+
+[Anohter video](https://www.youtube.com/watch?v=8UItItkD_RQ)
+
 ## RestAssured
 
 ### OpenWeather API demos
