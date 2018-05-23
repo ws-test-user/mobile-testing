@@ -6,11 +6,16 @@ import google.pages.HomePage;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+
+import static io.restassured.RestAssured.given;
 
 public class SmokeTests extends MobileTest {
 
@@ -49,5 +54,32 @@ public class SmokeTests extends MobileTest {
         }
 
         this.google.verifyLinkExist("appium.io");
+    }
+
+    @Test
+    public void searchForTemperature() {
+        // Get temperature via web
+        this.google.searchFor("temperature");
+        WebElement temp = client
+                .getDriver()
+                .findElement(By.id("wob_tm"));
+        int webTemp = Integer.valueOf(temp.getText());
+        System.out.println("Web Temperature: " + webTemp);
+
+        // Get temperature via web service
+        int serviceTemp = given().
+                param("units", "metric").
+                param("q", "Sofia,bg").
+                param("appid", "94dbcaa25f947f5c7abfc0faa6f3dcca").
+                when().
+                get("http://api.openweathermap.org/data/2.5/weather").
+                then()
+                .statusCode(200).
+                        extract().
+                        path("main.temp");
+        System.out.println("Service Temperature: " + serviceTemp);
+
+        Assert.assertTrue(Math.abs(webTemp - serviceTemp) < 2,
+                "Temperature in web and backend do not match!");
     }
 }
