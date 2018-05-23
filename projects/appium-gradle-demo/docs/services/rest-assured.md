@@ -21,6 +21,12 @@ export OPEN_WEATHER_API_KEY=94dbcaa25f947f5c7abfc0faa6f3dcca
 
 ### GitHub API demos
 
+#### Docs
+
+[GitHub Issue APIs](https://developer.github.com/v3/issues/)
+
+#### Samples
+
 Some sample tests for CRUD operations on GitHub availalbe here:
 https://github.com/dtopuzov/pragmatic-webservices/tree/master/reset-assured
 
