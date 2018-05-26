@@ -19,7 +19,7 @@ Specify config in VM Options:
 Run calculator tests on configuration specified in calc.emu.api23.properties:
 
 ```
-./gradlew clean calcTests -Dconfig=calc.emu.api23
+./gradlew clean calcTests -Pconfig=calc.emu.api23
 ```
 
 ## Additional Resources
