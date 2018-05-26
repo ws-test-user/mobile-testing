@@ -35,7 +35,33 @@ Download default installer and perform default installation.
 2. Open browser on http://localhost:8080
 3. Enter initial password and select plugins
 
+## Plugins
+
+### Green Balls
+
+[Green Balls](https://plugins.jenkins.io/greenballs) makes default blue balls (when build pass) green.
+
+### Junit Plugin
+
+[Junit Plugin](https://wiki.jenkins.io/display/JENKINS/JUnit+Plugin) will draw some nice charts and provide features such as historical analysis of tests results.
+
+### Timestamper
+
+[Timestamper](https://wiki.jenkins.io/display/JENKINS/Timestamper) will print times in console logs of jenkins jobs.
+
+### Job DSL Plugin
+
+[Job DSL Plugin](https://github.com/jenkinsci/job-dsl-plugin) will help you to keep your jobs as code.
+
 ## Troubleshooting
+
+### Safe Restart
+
+Open this URL:
+```
+http://localhost:8080/safeRestart
+```
+It will schedule restart, but if will wait all running jobs to complete.
 
 ### Uninstall on macOS
 

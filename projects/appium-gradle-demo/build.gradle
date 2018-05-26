@@ -26,10 +26,7 @@ test.dependsOn(check)
 // Do not run tests in check task (only run checkstyle).
 check.dependsOn.remove(test)
 
-
-task calcEmuAndroid6(type: Test, description: 'Calc Tests - Emulator (Android 6.0)', group: 'Verification') {
-
-    systemProperty 'config', 'calc.emu.api23'
+task calcTests(type: Test, description: 'Calculator Tests', group: 'Verification') {
 
     useTestNG() {
         //report generation delegated to TestNG library:
@@ -44,20 +41,6 @@ task calcEmuAndroid6(type: Test, description: 'Calc Tests - Emulator (Android 6.
     testLogging {
         showStandardStreams = false
 
-        exceptionFormat "full"
-        events "passed", "skipped", "failed"
-    }
-}
-
-task calcSimIos11(type: Test, description: 'Calc Tests - iPhone 5s (iOS 11.3)', group: 'Verification') {
-    systemProperty 'config', 'calc.sim.ios11'
-    include "**/calc/tests/**"
-    useTestNG() {
-        useDefaultListeners = true
-    }
-    reports.html.enabled = false
-    testLogging {
-        showStandardStreams = false
         exceptionFormat "full"
         events "passed", "skipped", "failed"
     }
