@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Calc Test" verbose="1">
+    <test name="Smoke Test">
+        <classes>
+            <class name="tests.OperationTests"/>
+            <class name="tests.SystemTests"/>
+        </classes>
+    </test>
+</suite>

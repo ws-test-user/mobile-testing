@@ -124,7 +124,7 @@ public class Settings {
             } else {
                 if (this.platformVersionIsLessThan("4.2")) {
                     return AutomationName.SELENDROID;
-                } else if (this.platformVersionIsLessThan("5.0")) {
+                } else if (this.platformVersionIsLessThan("6.0")) {
                     return AutomationName.APPIUM;
                 } else {
                     return AutomationName.ANDROID_UIAUTOMATOR2;
