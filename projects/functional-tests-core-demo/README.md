@@ -8,5 +8,5 @@ This project is to demonstrate capabilities of [functional-tests-core](https://g
 
 Calc test on Android 6.0 emulator:
 ```
-mvn clean test -P calc.emu.default.api23
+mvn clean test -P masterdetail.emu.default.api24
 ```

@@ -111,6 +111,13 @@
                 <testsuite>calc</testsuite>
             </properties>
         </profile>
+        <profile>
+            <id>masterdetail.emu.default.api24</id>
+            <properties>
+                <app.config>masterdetail/masterdetail.emu.default.api24.properties</app.config>
+                <testsuite>masterdetails</testsuite>
+            </properties>
+        </profile>
     </profiles>
 
 </project>
