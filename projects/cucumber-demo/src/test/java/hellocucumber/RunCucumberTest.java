@@ -1,10 +1,11 @@
 package hellocucumber;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
 
-@RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty"})
-public class RunCucumberTest {
+@CucumberOptions(
+        features = "src/test/resources/hellocucumber/CalcOperations.feature"
+)
+public class RunCucumberTest extends AbstractTestNGCucumberTests {
+
 }
