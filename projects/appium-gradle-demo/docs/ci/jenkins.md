@@ -1,3 +1,4 @@
+
 # Jenkins
 
 ## About 
@@ -36,6 +37,8 @@ Download default installer and perform default installation.
 3. Enter initial password and select plugins
 
 ## Plugins
+
+[Plugin Manager](http://localhost:8080/pluginManager/)
 
 ### Green Balls
 
